@@ -5,15 +5,45 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.opengl.Visibility;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.example.npe_06_shoplants.models.User;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class UserDetailActivity extends AppCompatActivity {
+    private Button btnSignOut;
+    private FirebaseAuth mAuth;
+    private CircleImageView civUserImage;
+    private FirebaseUser currentUser;
+    private TextView username, email;
+    private SharedPreferences preferences;
+    String loginMethod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +55,73 @@ public class UserDetailActivity extends AppCompatActivity {
 
         setSupportActionBar(tbUserDetail);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        preferences = getSharedPreferences("loginMethod", MODE_PRIVATE);
+        loginMethod = preferences.getString("method", "other");
+
+        if(!loginMethod.equals("signInWithEmailAndPassword")){
+            findViewById(R.id.navEditProfile).setVisibility(View.GONE);
+        }
+
+        btnSignOut = findViewById(R.id.btnSignOut);
+        civUserImage = findViewById(R.id.civUserImage);
+        username = findViewById(R.id.tvUserName);
+        email = findViewById(R.id.tvUserEmail);
+        mAuth = FirebaseAuth.getInstance();
+
+
+        currentUser = mAuth.getCurrentUser();
+
+        FirebaseDatabase.getInstance("https://shoplants-c2e1e-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference()
+                .child("User")
+                .child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                String usernameVal = "";
+                String emailVal = "";
+                if(snapshot.child("username").getValue() != null){
+                    usernameVal = snapshot.child("username").getValue().toString();
+                }else{
+                    usernameVal = currentUser.getDisplayName();
+                }
+
+                if(snapshot.child("email").getValue() != null){
+                    emailVal = snapshot.child("email").getValue().toString();
+                }else{
+                    emailVal = currentUser.getEmail();
+                }
+
+                username.setText(usernameVal);
+                email.setText(emailVal);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+
+                preferences.edit().putString("method", "");
+
+                GoogleSignIn.getClient(
+                        UserDetailActivity.this,
+                        new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
+                ).signOut();
+
+                startActivity(new Intent(UserDetailActivity.this, SignInActivity.class));
+                finish();
+            }
+        });
+
+        if(currentUser.getPhotoUrl() != null){
+            Glide.with(this).load(currentUser.getPhotoUrl()).into(civUserImage);
+        }
+
     }
 
     @Override
@@ -35,8 +132,11 @@ public class UserDetailActivity extends AppCompatActivity {
         }
         // saat memencet icon manage profile pada toolbar
         else if (item.getItemId() == R.id.navEditProfile) {
-            Intent editProfile = new Intent(UserDetailActivity.this, EditProfileActivity.class);
-            startActivity(editProfile);
+            if(loginMethod.equals("signInWithEmailAndPassword")){
+                Intent editProfile = new Intent(UserDetailActivity.this, EditProfileActivity.class);
+                startActivity(editProfile);
+            }
+
         }
 
         return true;

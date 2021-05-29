@@ -4,6 +4,197 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/secondaryBgColor"
     tools:context=".PlantDetailActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbPlantDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:elevation="8dp"
+        android:theme="@style/Theme.NPE_06_Shoplants"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/plant_detail_menu"
+        app:title="@string/empty">
+
+        <TextView
+            android:id="@+id/tvToolbarUserDetailTitle"
+            style="@style/ToolbarTitleAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:text="Plant Name Here" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:layout_width="240dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbPlantDetail"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/kaktus_plant" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@drawable/half_round_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tvAbout"
+            style="@style/ToolbarTitleAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:fontFamily="@font/nunito_sans_italic"
+            android:text="@string/about"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDecreaseOrder"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:cornerRadius="8dp"
+                app:icon="@drawable/ic_baseline_remove_24"
+                app:iconGravity="top"
+                app:iconSize="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTotalOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:text="@string/_0"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnIncreaseOrder"
+                app:layout_constraintStart_toEndOf="@id/btnDecreaseOrder"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnIncreaseOrder"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="12dp"
+                app:cornerRadius="8dp"
+                app:icon="@drawable/ic_baseline_add_24"
+                app:iconGravity="top"
+                app:iconSize="32dp"
+                app:layout_constraintStart_toEndOf="@id/tvTotalOrder"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="24dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/nunito_sans"
+            android:maxLines="4"
+            android:text="@string/plant_desc"
+            android:textColor="@color/accentColor3"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAbout" />
+
+        <TextView
+            android:id="@+id/tvSizeText"
+            style="@style/ToolbarTitleAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/select_size"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <LinearLayout
+            android:id="@+id/llCheckBoxContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/tvSizeText">
+
+            <CheckBox
+                android:id="@+id/cbSizeLarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:fontFamily="@font/nunito_sans"
+                android:text="@string/_40x80cm"
+                android:textColor="@color/accentColor3" />
+
+            <CheckBox
+                android:id="@+id/cbSizeMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="false"
+                android:fontFamily="@font/nunito_sans"
+                android:text="@string/_30x60cm"
+                android:textColor="@color/accentColor3" />
+
+            <CheckBox
+                android:id="@+id/cbSizeSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="false"
+                android:fontFamily="@font/nunito_sans"
+                android:text="@string/_20x40cm"
+                android:textColor="@color/accentColor3" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="28dp"
+        android:fontFamily="@font/nunito_sans_bold"
+        android:paddingVertical="12dp"
+        android:text="@string/add_to_cart_rp_0"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:backgroundTint="@color/primaryColor"
+        app:cornerRadius="8dp"
+        app:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

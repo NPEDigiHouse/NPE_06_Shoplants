@@ -32,4 +32,12 @@
     <string name="ganti_password">Ganti Password</string>
     <string name="password_baru">Password Baru</string>
     <string name="save_changes">Save Changes</string>
+    <string name="about">About</string>
+    <string name="_0">0</string>
+    <string name="plant_desc">Cactus can grow for a long time without water, so there is no need to water it as often</string>
+    <string name="select_size">Select Size</string>
+    <string name="_40x80cm">40X80cm</string>
+    <string name="_30x60cm">30X60cm</string>
+    <string name="_20x40cm">20X40cm</string>
+    <string name="add_to_cart_rp_0">Add To Cart - Rp.0</string>
 </resources>

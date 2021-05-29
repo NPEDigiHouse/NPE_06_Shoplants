@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "235592355370",
+    "project_id": "shoplants-c2e1e",
+    "storage_bucket": "shoplants-c2e1e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235592355370:android:1d73f016ce4067f8bc3d53",
+        "android_client_info": {
+          "package_name": "com.example.npe_06_shoplants"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235592355370-igt82s71jlns09rgahel8959ls0ggla3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.npe_06_shoplants",
+            "certificate_hash": "c67f170ba45460b30fb3ede6247e344f322a9b2e"
+          }
+        },
+        {
+          "client_id": "235592355370-4jg74d9mnl964ch4nprh4n2t7d8n9ap8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDay9kFEOONfaqsgd5FSSspUbnl-Aovqkg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235592355370-4jg74d9mnl964ch4nprh4n2t7d8n9ap8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

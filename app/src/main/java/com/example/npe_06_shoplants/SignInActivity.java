@@ -5,12 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private FirebaseAuth mAuth;
+    private ImageView googleSignIn;
+    private GoogleSignInClient mGoogleSignInClient;
+    private Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +35,15 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         ImageView ivSignInWithEmail = findViewById(R.id.ivSignInWithEmail);
         ivSignInWithEmail.setOnClickListener(this);
+
+        login = findViewById(R.id.btnSignIn);
+        googleSignIn = findViewById(R.id.ivSignInWithEmail);
+        mAuth = FirebaseAuth.getInstance();
+
+
+
     }
+
 
     @Override
     public void onClick(View view) {
@@ -37,4 +55,5 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(signUpIntent);
         }
     }
+
 }

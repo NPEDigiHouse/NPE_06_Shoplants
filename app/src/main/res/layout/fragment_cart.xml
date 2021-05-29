@@ -27,233 +27,237 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/half_round_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbCart">
+        app:layout_constraintTop_toBottomOf="@id/tbCart">
 
-        <ImageView
-            android:id="@+id/ivOrderPlantPhoto"
-            android:layout_width="160dp"
-            android:layout_height="180dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/kaktus_plant" />
-
-        <TextView
-            android:id="@+id/tvAbout"
-            style="@style/ToolbarTitleAppearance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:fontFamily="@font/nunito_sans_italic"
-            android:text="@string/about"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivOrderPlantPhoto" />
-
-        <TextView
-            android:id="@+id/tvTotalOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:fontFamily="@font/nunito_sans_bold"
-            android:textColor="@color/accentColor1"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivOrderPlantPhoto"
-            tools:text="Total : 2" />
-
-        <TextView
-            android:id="@+id/tvOrderPlantDescription"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/nunito_sans"
-            android:maxLines="4"
-            android:text="@string/plant_desc"
-            android:textColor="@color/accentColor3"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvAbout" />
+            android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/llCheckBoxContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/tvOrderPlantDescription">
+            <ImageView
+                android:id="@+id/ivOrderPlantPhoto"
+                android:layout_width="160dp"
+                android:layout_height="180dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/kaktus_plant" />
 
-            <CheckBox
-                android:id="@+id/cbSizeLarge"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/tvAbout"
+                style="@style/ToolbarTitleAppearance"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:enabled="false"
-                android:fontFamily="@font/nunito_sans"
-                android:text="@string/_40x80cm"
-                android:textColor="@color/accentColor3" />
+                android:layout_marginStart="24dp"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:text="@string/about"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivOrderPlantPhoto" />
 
-            <CheckBox
-                android:id="@+id/cbSizeMedium"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/tvTotalOrder"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="false"
-                android:enabled="false"
-                android:fontFamily="@font/nunito_sans"
-                android:text="@string/_30x60cm"
-                android:textColor="@color/accentColor3" />
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:textColor="@color/primaryColor"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivOrderPlantPhoto"
+                tools:text="Total : 2" />
 
-            <CheckBox
-                android:id="@+id/cbSizeSmall"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="false"
-                android:enabled="false"
-                android:fontFamily="@font/nunito_sans"
-                android:text="@string/_20x40cm"
-                android:textColor="@color/accentColor3" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvPaymentText"
-            style="@style/ToolbarTitleAppearance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/nunito_sans_bold"
-            android:text="@string/pengiriman_dan_pembayaran"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llCheckBoxContainer" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddress"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_sans_semibold"
-            android:paddingHorizontal="24dp"
-            android:paddingVertical="12dp"
-            android:text="@string/alamat"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/accentColor1"
-            app:cornerRadius="0dp"
-            app:icon="@drawable/ic_baseline_chevron_right_24"
-            app:iconGravity="end"
-            app:iconTint="@color/accentColor1"
-            app:layout_constraintTop_toBottomOf="@id/tvPaymentText"
-            app:rippleColor="@color/primaryBgColor"
-            app:strokeWidth="0dp" />
-
-        <View
-            android:id="@+id/vLine1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="24dp"
-            android:background="@color/accentColor2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnAddress" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnPaymentMethod"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_sans_semibold"
-            android:paddingHorizontal="24dp"
-            android:paddingVertical="12dp"
-            android:text="@string/metode_pembayaran"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@color/accentColor1"
-            app:cornerRadius="0dp"
-            app:icon="@drawable/ic_baseline_chevron_right_24"
-            app:iconGravity="end"
-            app:iconTint="@color/accentColor1"
-            app:layout_constraintTop_toBottomOf="@+id/vLine1"
-            app:rippleColor="@color/primaryBgColor"
-            app:strokeWidth="0dp" />
-
-        <View
-            android:id="@+id/vLine2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="24dp"
-            android:background="@color/accentColor2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnPaymentMethod" />
-
-        <TextView
-            android:id="@+id/tvInstructionsText"
-            style="@style/ToolbarTitleAppearance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/nunito_sans_bold"
-            android:text="@string/pesan_instruksi"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnPaymentMethod" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tfInstructions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            app:boxBackgroundColor="@null"
-            app:errorEnabled="false"
-            app:hintEnabled="false"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvInstructionsText">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etInstructions"
+            <TextView
+                android:id="@+id/tvOrderPlantDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/nunito_sans"
-                android:hint="@string/catatan_untuk_penjual_opsional"
-                android:inputType="text"
-                android:paddingStart="0dp"
-                android:paddingEnd="0dp"
-                android:textColor="@color/accentColor1" />
+                android:maxLines="4"
+                android:text="@string/plant_desc"
+                android:textColor="@color/accentColor3"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAbout" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:id="@+id/llCheckBoxContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/tvOrderPlantDescription">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <CheckBox
+                    android:id="@+id/cbSizeLarge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:enabled="false"
+                    android:fontFamily="@font/nunito_sans"
+                    android:text="@string/_40x80cm"
+                    android:textColor="@color/accentColor3" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnOrder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginBottom="28dp"
-        android:fontFamily="@font/nunito_sans_bold"
-        android:paddingVertical="12dp"
-        android:text="@string/bayar_sekarang"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        app:backgroundTint="@color/primaryColor"
-        app:cornerRadius="8dp"
-        app:elevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+                <CheckBox
+                    android:id="@+id/cbSizeMedium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:enabled="false"
+                    android:fontFamily="@font/nunito_sans"
+                    android:text="@string/_30x60cm"
+                    android:textColor="@color/accentColor3" />
+
+                <CheckBox
+                    android:id="@+id/cbSizeSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:enabled="false"
+                    android:fontFamily="@font/nunito_sans"
+                    android:text="@string/_20x40cm"
+                    android:textColor="@color/accentColor3" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvPaymentText"
+                style="@style/ToolbarTitleAppearance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:text="@string/pengiriman_dan_pembayaran"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llCheckBoxContainer" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddress"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:paddingHorizontal="24dp"
+                android:text="@string/alamat"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:textColor="@color/accentColor1"
+                app:cornerRadius="0dp"
+                app:icon="@drawable/ic_baseline_chevron_right_24"
+                app:iconGravity="end"
+                app:iconTint="@color/accentColor1"
+                app:layout_constraintTop_toBottomOf="@id/tvPaymentText"
+                app:rippleColor="@color/primaryBgColor"
+                app:strokeWidth="0dp" />
+
+            <View
+                android:id="@+id/vLine1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="24dp"
+                android:background="@color/accentColor2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnAddress" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPaymentMethod"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:paddingHorizontal="24dp"
+                android:text="@string/metode_pembayaran"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:textColor="@color/accentColor1"
+                app:cornerRadius="0dp"
+                app:icon="@drawable/ic_baseline_chevron_right_24"
+                app:iconGravity="end"
+                app:iconTint="@color/accentColor1"
+                app:layout_constraintTop_toBottomOf="@+id/vLine1"
+                app:rippleColor="@color/primaryBgColor"
+                app:strokeWidth="0dp" />
+
+            <View
+                android:id="@+id/vLine2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="24dp"
+                android:background="@color/accentColor2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnPaymentMethod" />
+
+            <TextView
+                android:id="@+id/tvInstructionsText"
+                style="@style/ToolbarTitleAppearance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:text="@string/pesan_instruksi"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnPaymentMethod" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tfInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                app:boxBackgroundColor="@color/tertiaryBgColor"
+                app:errorEnabled="false"
+                app:hintEnabled="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvInstructionsText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etInstructions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans"
+                    android:hint="@string/catatan_untuk_penjual_opsional"
+                    android:inputType="text"
+                    android:paddingStart="0dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="@color/accentColor1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:paddingVertical="12dp"
+                android:text="@string/bayar_sekarang"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                app:backgroundTint="@color/primaryColor"
+                app:cornerRadius="8dp"
+                app:elevation="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tfInstructions" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

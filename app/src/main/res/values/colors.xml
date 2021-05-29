@@ -10,6 +10,6 @@
     <color name="accentColor3">#5E5E5E</color>
     <color name="primaryBgColor">#aaa8a8</color>
     <color name="secondaryBgColor">#e7f3e8</color>
-    <color name="tertiaryBgColor">#f5f5f5</color>
+    <color name="tertiaryBgColor">#F4F4F4</color>
     <color name="dividerColor">#dcdcdc</color>
 </resources>

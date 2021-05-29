@@ -34,7 +34,7 @@ public class PlantDetailActivity extends AppCompatActivity {
         }
         // saat memencet icon favorite pada toolbar
         // else if (item.getItemId() == R.id.favoriteIcon) {
-            // do something here
+        // do something here
         // }
 
         return true;

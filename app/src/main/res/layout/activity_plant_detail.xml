@@ -30,6 +30,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ImageView
+        android:id="@+id/ivDetailPlantPhoto"
         android:layout_width="240dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
@@ -86,7 +87,7 @@
                 android:layout_margin="12dp"
                 android:fontFamily="@font/nunito_sans_bold"
                 android:text="@string/_0"
-                android:textColor="@color/black"
+                android:textColor="@color/accentColor1"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btnIncreaseOrder"
@@ -109,7 +110,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tvDetailPlantDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="32dp"
@@ -134,7 +135,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDetailPlantDescription" />
 
         <LinearLayout
             android:id="@+id/llCheckBoxContainer"
@@ -180,7 +181,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnOrder"
+        android:id="@+id/btnAddToCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"

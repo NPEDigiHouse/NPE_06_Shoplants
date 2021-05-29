@@ -76,6 +76,7 @@ public class PlantDetailActivity extends AppCompatActivity {
         findViewById(R.id.favoriteIcon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Plant plant = new Plant();
                 plant.setId(id);
                 plant.setName(name);
@@ -83,21 +84,43 @@ public class PlantDetailActivity extends AppCompatActivity {
                 plant.setPrice(price);
                 plant.setDescription(description);
 
-                FirebaseDatabase.getInstance("https://shoplants-c2e1e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                if(FirebaseDatabase.getInstance("https://shoplants-c2e1e-default-rtdb.asia-southeast1.firebasedatabase.app/")
                         .getReference("Favorite")
                         .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
-                        .child(String.valueOf(plant.getId()))
-                        .setValue(plant)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(PlantDetailActivity.this, "Added to favorites", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(PlantDetailActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                        .child(String.valueOf(plant.getId())) != null){
+                    FirebaseDatabase.getInstance("https://shoplants-c2e1e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                            .getReference("Favorite")
+                            .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+                            .child(String.valueOf(plant.getId()))
+                            .removeValue()
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(PlantDetailActivity.this, "Removed from favorites", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(PlantDetailActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }else {
+
+                    FirebaseDatabase.getInstance("https://shoplants-c2e1e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                            .getReference("Favorite")
+                            .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+                            .child(String.valueOf(plant.getId()))
+                            .setValue(plant)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(PlantDetailActivity.this, "Added to favorites", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(PlantDetailActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
             }
         });
 

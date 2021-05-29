@@ -37,6 +37,8 @@ public class PlantsData {
             plant.setName(plantName[i]);
             plant.setImageUrl(imageURL[i]);
             plant.setPrice(price[i]);
+
+            list.add(plant);
         }
 
         return list;

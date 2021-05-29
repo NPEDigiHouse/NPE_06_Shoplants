@@ -80,32 +80,32 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfEmailEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="12dp"
-        android:hint="@string/email_address"
-        app:boxBackgroundColor="@color/tertiaryBgColor"
-        app:endIconMode="clear_text"
-        app:errorEnabled="false"
-        app:errorIconDrawable="@null"
-        app:helperTextTextColor="@color/design_default_color_error"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tfUsernameEdit"
-        app:startIconDrawable="@drawable/ic_baseline_email_24">
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/tfEmailEdit"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="24dp"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:hint="@string/email_address"-->
+<!--        app:boxBackgroundColor="@color/tertiaryBgColor"-->
+<!--        app:endIconMode="clear_text"-->
+<!--        app:errorEnabled="false"-->
+<!--        app:errorIconDrawable="@null"-->
+<!--        app:helperTextTextColor="@color/design_default_color_error"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tfUsernameEdit"-->
+<!--        app:startIconDrawable="@drawable/ic_baseline_email_24">-->
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etEmailEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_sans"
-            android:inputType="textEmailAddress"
-            android:text="@string/bellapoarch571_email_com"
-            android:textColor="@color/accentColor1" />
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/etEmailEdit"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/nunito_sans"-->
+<!--            android:inputType="textEmailAddress"-->
+<!--            android:text="@string/bellapoarch571_email_com"-->
+<!--            android:textColor="@color/accentColor1" />-->
 
-    </com.google.android.material.textfield.TextInputLayout>
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
 
     <TextView
         android:id="@+id/tvChangePassText"
@@ -118,7 +118,7 @@
         android:textColor="@color/primaryColor"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tfEmailEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/tfUsernameEdit" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tfPasswordEdit"

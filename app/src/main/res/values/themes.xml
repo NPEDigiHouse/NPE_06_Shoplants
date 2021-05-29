@@ -13,6 +13,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:textColorSecondary">@color/accentColor1</item>
     </style>
 
     <style name="Theme.NPE_06_Shoplants.TransparentStatusBar">
@@ -22,5 +23,11 @@
 
     <style name="Widget.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.PrimarySurface">
         <item name="android:fontFamily">@font/nunito_sans</item>
+    </style>
+
+    <style name="ToolbarTitleAppearance" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:fontFamily">@font/nunito_sans_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/accentColor1</item>
     </style>
 </resources>

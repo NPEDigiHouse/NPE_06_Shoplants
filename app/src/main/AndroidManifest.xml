@@ -11,6 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NPE_06_Shoplants"
         tools:ignore="AllowBackup">
+        <activity android:name=".EditProfileActivity"></activity>
+        <activity android:name=".UserDetailActivity" />
         <activity
             android:name=".PlantDetailActivity"
             android:screenOrientation="portrait" />

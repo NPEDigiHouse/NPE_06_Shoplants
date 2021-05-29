@@ -19,4 +19,17 @@
     <string name="sign_up">Sign Up</string>
     <string name="already_have_an_account">Already Have an Account?</string>
     <string name="username">Username</string>
+    <string name="empty">‏‏‎ ‎</string>
+    <string name="user_detail">User Detail</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="log_out">Log Out</string>
+    <string name="rewards">Rewards</string>
+    <string name="profil_bisnis">Bussines Profile</string>
+    <string name="your_card">Your Card</string>
+    <string name="settings">Settings</string>
+    <string name="help_center">Help Center</string>
+    <string name="bellapoarch571_email_com">useremail@email.com</string>
+    <string name="ganti_password">Ganti Password</string>
+    <string name="password_baru">Password Baru</string>
+    <string name="save_changes">Save Changes</string>
 </resources>

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.npe_06_shoplants.adapters.FavoritePlantsAdapter;
@@ -39,7 +40,6 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
         Bundle args = new Bundle();
         // args.putString(MainActivity.TOOLBAR_TITLE, "favorite");
         favoriteFragment.setArguments(args);
-
         return favoriteFragment;
     }
 
@@ -55,29 +55,30 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
         CircleImageView civImageProfile = view.findViewById(R.id.civImageProfile);
         civImageProfile.setOnClickListener(this);
 
-        recyclerView = view.findViewById(R.id.rvRecommendedPlants);
+        recyclerView = view.findViewById(R.id.rvFavoritePlants);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-//        FirebaseDatabase.getInstance("https://shoplants-c2e1e-default-rtdb.asia-southeast1.firebasedatabase.app/")
-//                .getReference("Favorite")
-//                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-//                plants = new ArrayList<>();
-//
-//                for(DataSnapshot item : snapshot.getChildren()){
-//                    Plant plant = item.getValue(Plant.class);
-//                    plants.add(plant);
-//                }
-//                recyclerView.setAdapter(new FavoritePlantsAdapter(plants));
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//            }
-//        });
+
+        FirebaseDatabase.getInstance("https://shoplants-c2e1e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("Favorite")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                plants = new ArrayList<>();
+
+                for (DataSnapshot item : snapshot.getChildren()) {
+                    Plant plant = item.getValue(Plant.class);
+                    plants.add(plant);
+                }
+                recyclerView.setAdapter(new FavoritePlantsAdapter(plants));
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
 
         return view;
     }

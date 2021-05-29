@@ -34,7 +34,7 @@ public class PlantDetailActivity extends AppCompatActivity {
 
     private String name, imgUrl, description;
     private int price, id;
-    private TextView tvTitle, tvTotalOrder;
+    private TextView tvTitle, tvTotalOrder, tvDetailPlantDescription;
     private ImageView ivCover;
     private Button btnDecreaseOrder, btnIncreaseOrder;
     private MaterialButton btnAddtoCart;
@@ -60,9 +60,11 @@ public class PlantDetailActivity extends AppCompatActivity {
 
         tvTitle = findViewById(R.id.tvToolbarUserDetailTitle);
         ivCover = findViewById(R.id.ivDetailPlantPhoto);
+        tvDetailPlantDescription = findViewById(R.id.tvDetailPlantDescription);
 
         tvTitle.setText(name);
         Glide.with(this).load(imgUrl).into(ivCover);
+        tvDetailPlantDescription.setText(description);
 
         btnDecreaseOrder = findViewById(R.id.btnDecreaseOrder);
         btnIncreaseOrder = findViewById(R.id.btnIncreaseOrder);

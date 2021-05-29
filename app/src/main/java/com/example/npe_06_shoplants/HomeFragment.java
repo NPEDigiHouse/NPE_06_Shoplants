@@ -2,6 +2,8 @@ package com.example.npe_06_shoplants;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -11,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.npe_06_shoplants.adapters.HomePlantsAdapter;
+import com.example.npe_06_shoplants.adapters.SearchPlantsAdapter;
+import com.example.npe_06_shoplants.data.PlantsData;
 import com.example.npe_06_shoplants.models.Plant;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,7 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
-    private List<Plant> list;
+    private List<Plant> plants;
 
     public static HomeFragment newInstance() {
         HomeFragment homeFragment = new HomeFragment();
@@ -46,6 +51,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         CircleImageView civImageProfile = view.findViewById(R.id.civImageProfile);
         civImageProfile.setOnClickListener(this);
+
+        plants = PlantsData.getPlantsData();
+        recyclerView = view.findViewById(R.id.rvHomePlants);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(new HomePlantsAdapter(plants));
 
         assert currentUser != null;
         if (currentUser.getPhotoUrl() != null) {

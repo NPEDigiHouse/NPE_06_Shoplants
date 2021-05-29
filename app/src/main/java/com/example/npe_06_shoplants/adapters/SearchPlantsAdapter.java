@@ -1,5 +1,6 @@
 package com.example.npe_06_shoplants.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.npe_06_shoplants.PlantDetailActivity;
 import com.example.npe_06_shoplants.R;
 import com.example.npe_06_shoplants.models.Plant;
@@ -35,12 +37,18 @@ public class SearchPlantsAdapter extends RecyclerView.Adapter<SearchPlantsAdapte
         return new ViewHolder(view);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(@NonNull @NotNull SearchPlantsAdapter.ViewHolder holder, int position) {
         final Plant plant = plants.get(position);
-        Glide.with(holder.itemView.getContext()).load(plant.getImageUrl()).into(holder.ivSearchPlant);
+
+        Glide.with(holder.itemView.getContext())
+                .load(plant.getImageUrl())
+                .apply(new RequestOptions().override(300, 360))
+                .into(holder.ivSearchPlant);
+
         holder.tvSearchPlantName.setText(plant.getName());
-        holder.tvSearchPlantPrice.setText(String.valueOf(plant.getPrice()));
+        holder.tvSearchPlantPrice.setText(String.format("Rp.%d", plant.getPrice()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

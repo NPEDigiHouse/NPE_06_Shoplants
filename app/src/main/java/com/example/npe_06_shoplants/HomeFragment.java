@@ -2,16 +2,20 @@ package com.example.npe_06_shoplants;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.npe_06_shoplants.adapters.HomePlantsAdapter;
+import com.example.npe_06_shoplants.adapters.SearchPlantsAdapter;
+import com.example.npe_06_shoplants.data.PlantsData;
 import com.example.npe_06_shoplants.models.Plant;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,9 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
-    private List<Plant> list;
-    private FirebaseAuth mAuth;
-    private FirebaseUser currentUser;
+    private List<Plant> plants;
 
     public static HomeFragment newInstance() {
         HomeFragment homeFragment = new HomeFragment();
@@ -44,13 +46,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         CircleImageView civImageProfile = view.findViewById(R.id.civImageProfile);
         civImageProfile.setOnClickListener(this);
 
-        if(currentUser.getPhotoUrl() != null){
+        plants = PlantsData.getPlantsData();
+        recyclerView = view.findViewById(R.id.rvHomePlants);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(new HomePlantsAdapter(plants));
+
+        assert currentUser != null;
+        if (currentUser.getPhotoUrl() != null) {
             Glide.with(view).load(currentUser.getPhotoUrl()).into(civImageProfile);
         }
 

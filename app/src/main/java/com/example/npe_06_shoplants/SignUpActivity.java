@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,7 +30,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private Button btnSignUp;
     private FirebaseAuth mAuth;
-    private EditText etUsername, etEmail, etPassword;
+    private TextInputLayout tfUsername, tfEmail, tfPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +43,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         TextView tvSignIn = findViewById(R.id.tvSignIn);
         tvSignIn.setOnClickListener(this);
 
-        etUsername = findViewById(R.id.etUsername);
-        etEmail = findViewById(R.id.etEmail);
-        etPassword = findViewById(R.id.etPassword);
+        tfUsername = findViewById(R.id.tfUsername);
+        tfEmail = findViewById(R.id.tfEmail);
+        tfPassword = findViewById(R.id.tfPassword);
 
         mAuth = FirebaseAuth.getInstance();
     }
@@ -62,34 +63,67 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btnSignUp) {
-            signUp();
+            String username = Objects.requireNonNull(tfUsername.getEditText()).getText().toString().trim();
+            String email = Objects.requireNonNull(tfEmail.getEditText()).getText().toString().trim();
+            String password = Objects.requireNonNull(tfPassword.getEditText()).getText().toString().trim();
+            signUp(username, email, password);
         } else if (view.getId() == R.id.tvSignIn) {
-            finish();
+            Intent signInIntent = new Intent(SignUpActivity.this, SignInActivity.class);
+            signInIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(signInIntent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 
-    private void signUp() {
-        String email = etEmail.getText().toString().trim();
-        String username = etUsername.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
-
-        if (username.isEmpty()) {
-            etUsername.setError("Please insert username");
-            etUsername.requestFocus();
-            return;
+    private boolean validateField(TextInputLayout textInputLayout, String text) {
+        if (text.isEmpty()) {
+            textInputLayout.setErrorEnabled(true);
+            textInputLayout.setError("Field can't be empty.");
+            return false;
         }
 
+        textInputLayout.setErrorEnabled(false);
+        return true;
+    }
+
+    private boolean validateEmail(String email) {
         if (email.isEmpty()) {
-            etEmail.setError("Please insert email");
-            etUsername.requestFocus();
+            tfEmail.setErrorEnabled(true);
+            tfEmail.setError("Field can't be empty.");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            tfEmail.setErrorEnabled(true);
+            tfEmail.setError("Please provide valid email.");
+            return false;
+        } else {
+            tfEmail.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validatePassword(String password) {
+        if (password.isEmpty()) {
+            tfPassword.setErrorEnabled(true);
+            tfPassword.setError("Field can't be empty.");
+            return false;
+        } else if (password.length() < 6) {
+            tfPassword.setErrorEnabled(true);
+            tfPassword.setError("Password must have at least 6 characters.");
+            return false;
+        } else {
+            tfPassword.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private void signUp(String username, String email, String password) {
+        if (!validateField(tfUsername, username) | !validateEmail(email) | !validatePassword(password)) {
             return;
         }
 
-        if (password.isEmpty()) {
-            etEmail.setError("Please insert password");
-            etUsername.requestFocus();
-            return;
-        }
+        tfUsername.setErrorEnabled(false);
+        tfEmail.setErrorEnabled(false);
+        tfPassword.setErrorEnabled(false);
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

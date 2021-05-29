@@ -24,7 +24,6 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SearchFragment extends Fragment implements View.OnClickListener {
-
     private List<Plant> plants;
     private RecyclerView recyclerView;
     private EditText searchValue;
@@ -34,7 +33,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         Bundle args = new Bundle();
         // args.putString(MainActivity.TOOLBAR_TITLE, "search");
         searchFragment.setArguments(args);
-
         return searchFragment;
     }
 
@@ -53,8 +51,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         searchValue = view.findViewById(R.id.etSearchBar);
 
         plants = PlantsData.getPlantsData();
+
         recyclerView = view.findViewById(R.id.rvSearchedPlants);
-        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 2));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(new SearchPlantsAdapter(plants));
 
@@ -80,8 +79,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
     private void filter(String text) {
         List<Plant> filtered = new ArrayList<>();
-        for(Plant e: plants){
-            if(e.getName().toLowerCase().contains(text.toLowerCase())){
+
+        for (Plant e : plants) {
+            if (e.getName().toLowerCase().contains(text.toLowerCase())) {
                 filtered.add(e);
             }
         }

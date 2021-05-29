@@ -56,6 +56,7 @@ public class HomePlantsAdapter extends RecyclerView.Adapter<HomePlantsAdapter.Vi
                 intent.putExtra("Name", plant.getName());
                 intent.putExtra("Image", plant.getImageUrl());
                 intent.putExtra("Price", plant.getPrice());
+                intent.putExtra("Description", plant.getDescription());
                 holder.itemView.getContext().startActivity(intent);
             }
         });
@@ -72,7 +73,6 @@ public class HomePlantsAdapter extends RecyclerView.Adapter<HomePlantsAdapter.Vi
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-
             ivHomePlant = itemView.findViewById(R.id.ivHomePlantPhoto);
             tvHomePlantName = itemView.findViewById(R.id.tvHomePlantName);
             tvHomePlantPrice = itemView.findViewById(R.id.tvHomePlantPrice);

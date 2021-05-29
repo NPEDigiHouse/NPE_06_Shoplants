@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -33,7 +34,7 @@ public class PlantDetailActivity extends AppCompatActivity {
 
     private String name, imgUrl, description;
     private int price, id;
-    private TextView tvTitle ,tvTotalOrder;
+    private TextView tvTitle, tvTotalOrder;
     private ImageView ivCover;
     private Button btnDecreaseOrder, btnIncreaseOrder;
     private MaterialButton btnAddtoCart;
@@ -51,10 +52,10 @@ public class PlantDetailActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
-        id = intent.getIntExtra("Id",0);
+        id = intent.getIntExtra("Id", 0);
         name = intent.getStringExtra("Name");
         imgUrl = intent.getStringExtra("Image");
-        price = intent.getIntExtra("Price",0);
+        price = intent.getIntExtra("Price", 0);
         description = intent.getStringExtra("Description");
 
         tvTitle = findViewById(R.id.tvToolbarUserDetailTitle);
@@ -95,31 +96,30 @@ public class PlantDetailActivity extends AppCompatActivity {
                                 }
                             }
                         });
-
             }
         });
 
         btnIncreaseOrder.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("DefaultLocale")
             @Override
             public void onClick(View view) {
                 total = total + 1;
                 tvTotalOrder.setText(String.valueOf(total));
-                btnAddtoCart.setText("Rp. "+ String.valueOf(total*price));
+                btnAddtoCart.setText(String.format("Rp.%d", total * price));
             }
         });
+
         btnDecreaseOrder.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("DefaultLocale")
             @Override
             public void onClick(View view) {
-                if(total > 0){
+                if (total > 0) {
                     total = total - 1;
                     tvTotalOrder.setText(String.valueOf(total));
-                    btnAddtoCart.setText("Rp. "+ String.valueOf(total*price));
+                    btnAddtoCart.setText(String.format("Rp.%d", total * price));
                 }
             }
         });
-
-
-
     }
 
     @Override

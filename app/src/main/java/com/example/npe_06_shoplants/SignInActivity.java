@@ -3,14 +3,13 @@ package com.example.npe_06_shoplants;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +22,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,15 +31,15 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int RC_SIGN_IN = 123;
     private FirebaseAuth mAuth;
-    private ImageView googleSignIn;
     private GoogleSignInClient mGoogleSignInClient;
     private Button login;
-
-    private EditText etEmail, etPassword;
+    private TextInputLayout tfUsernameOrEmail, tfPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +49,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         MaterialButton btnSignIn = findViewById(R.id.btnSignIn);
         btnSignIn.setOnClickListener(this);
 
-        etEmail = findViewById(R.id.etUsernameOrEmail);
-        etPassword = findViewById(R.id.etPassword);
+        TextView tvSignUp = findViewById(R.id.tvSignUp);
+        tvSignUp.setOnClickListener(this);
+
+        tfUsernameOrEmail = findViewById(R.id.tfUsernameOrEmail);
+        tfPassword = findViewById(R.id.tfPassword);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -59,7 +62,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        googleSignIn = findViewById(R.id.ivSignInWithEmail);
+        ImageView googleSignIn = findViewById(R.id.ivSignInWithEmail);
         mAuth = FirebaseAuth.getInstance();
 
         googleSignIn.setOnClickListener(new View.OnClickListener() {
@@ -80,39 +83,60 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btnSignIn:
-                manualSignIn();
-                break;
-
-            case R.id.tvSignUp:
-                startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
+        if (view.getId() == R.id.btnSignIn) {
+            String usernameOrEmail = Objects.requireNonNull(tfUsernameOrEmail.getEditText()).getText().toString();
+            String password = Objects.requireNonNull(tfPassword.getEditText()).getText().toString();
+            manualSignIn(usernameOrEmail, password);
+        } else if (view.getId() == R.id.tvSignUp) {
+            Intent signUpIntent = new Intent(SignInActivity.this, SignUpActivity.class);
+            signUpIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(signUpIntent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 
-    private void manualSignIn() {
-        String email = etEmail.getText().toString();
-        String password = etPassword.getText().toString();
-
+    private boolean validateEmail(String email) {
         if (email.isEmpty()) {
-            etEmail.setError("Please insert password");
-            etEmail.requestFocus();
-            return;
+            tfUsernameOrEmail.setErrorEnabled(true);
+            tfUsernameOrEmail.setError("Field can't be empty.");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            tfUsernameOrEmail.setErrorEnabled(true);
+            tfUsernameOrEmail.setError("Please provide valid email.");
+            return false;
+        } else {
+            tfUsernameOrEmail.setErrorEnabled(false);
+            return true;
         }
+    }
 
+    private boolean validatePassword(String password) {
         if (password.isEmpty()) {
-            etPassword.setError("Please insert password");
-            etPassword.requestFocus();
-            return;
+            tfPassword.setErrorEnabled(true);
+            tfPassword.setError("Field can't be empty.");
+            return false;
+        } else if (password.length() < 6) {
+            tfPassword.setErrorEnabled(true);
+            tfPassword.setError("Password must have at least 6 characters.");
+            return false;
+        } else {
+            tfPassword.setErrorEnabled(false);
+            return true;
         }
+    }
 
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    private void manualSignIn(String usernameOrEmail, String password) {
+        if (!validatePassword(password) | !validateEmail(usernameOrEmail)) return;
+
+        tfUsernameOrEmail.setErrorEnabled(false);
+        tfPassword.setErrorEnabled(false);
+
+        mAuth.signInWithEmailAndPassword(usernameOrEmail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     SharedPreferences preferences = getSharedPreferences("loginMethod", MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("method", "signInWithEmailAndPassword");
@@ -141,6 +165,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
+                assert account != null;
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately

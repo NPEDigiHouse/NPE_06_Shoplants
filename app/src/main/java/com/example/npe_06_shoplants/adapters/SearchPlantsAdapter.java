@@ -21,9 +21,9 @@ import java.util.List;
 
 
 public class SearchPlantsAdapter extends RecyclerView.Adapter<SearchPlantsAdapter.ViewHolder> {
-    private List<Plant> plants;
+    private final List<Plant> plants;
 
-    public SearchPlantsAdapter(List<Plant> plants){
+    public SearchPlantsAdapter(List<Plant> plants) {
         this.plants = plants;
     }
 
@@ -46,7 +46,7 @@ public class SearchPlantsAdapter extends RecyclerView.Adapter<SearchPlantsAdapte
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(holder.itemView.getContext(), PlantDetailActivity.class);
-                intent.putExtra("Name",plant.getName());
+                intent.putExtra("Name", plant.getName());
                 intent.putExtra("Image", plant.getImageUrl());
                 intent.putExtra("Price", plant.getPrice());
                 holder.itemView.getContext().startActivity(intent);
@@ -59,7 +59,7 @@ public class SearchPlantsAdapter extends RecyclerView.Adapter<SearchPlantsAdapte
         return plants.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivSearchPlant;
         TextView tvSearchPlantName, tvSearchPlantPrice;
 

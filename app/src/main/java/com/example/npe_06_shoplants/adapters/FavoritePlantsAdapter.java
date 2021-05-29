@@ -1,6 +1,7 @@
 package com.example.npe_06_shoplants.adapters;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,13 +31,17 @@ public class FavoritePlantsAdapter extends RecyclerView.Adapter<FavoritePlantsAd
     @NotNull
     @Override
     public FavoritePlantsAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grid_search, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grid_favorite, parent, false);
         return new FavoritePlantsAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull FavoritePlantsAdapter.ViewHolder holder, int position) {
         final Plant plant = plants.get(position);
+        if(holder.ivSearchPlant == null){
+            Log.e("Error", "Null");
+        }
+
         Glide.with(holder.itemView.getContext()).load(plant.getImageUrl()).into(holder.ivSearchPlant);
         holder.tvSearchPlantName.setText(plant.getName());
         holder.tvSearchPlantPrice.setText(String.valueOf(plant.getPrice()));

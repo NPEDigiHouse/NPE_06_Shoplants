@@ -3,7 +3,8 @@ package com.example.npe_06_shoplants.models;
 public class User {
     public String username, email;
 
-    public User(){}
+    public User() {
+    }
 
     public String getUsername() {
         return username;
@@ -21,7 +22,7 @@ public class User {
         this.email = email;
     }
 
-    public User(String username, String email){
+    public User(String username, String email) {
         this.username = username;
         this.email = email;
     }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- saat dihapus dari favorite icon berubah menjadi outline -->
+    <item
+        android:id="@+id/favoriteIcon"
+        android:icon="@drawable/ic_outline_favorite_border_28"
+        android:title="@string/favorite"
+        app:showAsAction="ifRoom" />
+</menu>

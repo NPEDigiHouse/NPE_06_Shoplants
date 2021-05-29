@@ -3,6 +3,7 @@ package com.example.npe_06_shoplants;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -73,16 +74,16 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     protected void onStart() {
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
-        if(user != null){
+        if (user != null) {
             startActivity(new Intent(SignInActivity.this, MainActivity.class));
             finish();
         }
     }
 
-
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.btnSignIn:
                 manualSignIn();
                 break;
@@ -96,16 +97,18 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
 
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             etEmail.setError("Please insert password");
             etEmail.requestFocus();
             return;
         }
-        if(password.isEmpty()){
+
+        if (password.isEmpty()) {
             etPassword.setError("Please insert password");
             etPassword.requestFocus();
             return;
         }
+
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
@@ -114,10 +117,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("method", "signInWithEmailAndPassword");
                     editor.apply();
-
                     startActivity(new Intent(SignInActivity.this, MainActivity.class));
                     finish();
-                }else{
+                } else {
                     Toast.makeText(SignInActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -170,6 +172,4 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 });
     }
-
-
 }

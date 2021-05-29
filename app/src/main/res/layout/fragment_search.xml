@@ -81,7 +81,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clTopProfile" />
 
-    <!-- recyclerView ini nantinya berbentuk grid dengan 2 kolom vertikal -->
+    <!-- recyclerView ini nantinya berbentuk grid dengan 2 kolom (vertikal) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearchedPlants"
         android:layout_width="match_parent"

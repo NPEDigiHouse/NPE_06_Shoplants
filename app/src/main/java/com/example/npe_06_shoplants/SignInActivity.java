@@ -3,6 +3,7 @@ package com.example.npe_06_shoplants;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,9 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
@@ -57,16 +56,16 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     protected void onStart() {
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
-        if(user != null){
+        if (user != null) {
             startActivity(new Intent(SignInActivity.this, MainActivity.class));
             finish();
         }
     }
 
-
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.btnSignIn:
                 manualSignIn();
                 break;
@@ -79,27 +78,28 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
 
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             etEmail.setError("Please insert password");
             etEmail.requestFocus();
             return;
         }
-        if(password.isEmpty()){
+
+        if (password.isEmpty()) {
             etPassword.setError("Please insert password");
             etPassword.requestFocus();
             return;
         }
+
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     startActivity(new Intent(SignInActivity.this, MainActivity.class));
                     finish();
-                }else{
+                } else {
                     Toast.makeText(SignInActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
 }

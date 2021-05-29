@@ -30,13 +30,25 @@ public class PlantsData {
             90000
     };
 
+    private static final String[] descirption = {
+            "Bonsai",
+            "Bambu",
+            "Lavender",
+            "Red Plant",
+            "Kaktus"
+    };
+
     public static List<Plant> getPlantsData() {
         List<Plant> list = new ArrayList<>();
         for (int i = 0; i < plantName.length; i++) {
+            int id = i+1;
+
             Plant plant = new Plant();
+            plant.setId(id);
             plant.setName(plantName[i]);
             plant.setImageUrl(imageURL[i]);
             plant.setPrice(price[i]);
+            plant.setDescription(descirption[i]);
 
             list.add(plant);
         }

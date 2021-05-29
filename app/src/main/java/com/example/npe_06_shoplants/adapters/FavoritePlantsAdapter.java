@@ -19,28 +19,28 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-
-public class SearchPlantsAdapter extends RecyclerView.Adapter<SearchPlantsAdapter.ViewHolder> {
+public class FavoritePlantsAdapter extends RecyclerView.Adapter<FavoritePlantsAdapter.ViewHolder> {
     private List<Plant> plants;
 
-    public SearchPlantsAdapter(List<Plant> plants){
+    public FavoritePlantsAdapter(List<Plant> plants){
         this.plants = plants;
     }
 
     @NonNull
     @NotNull
     @Override
-    public SearchPlantsAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public FavoritePlantsAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grid_search, parent, false);
-        return new ViewHolder(view);
+        return new FavoritePlantsAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull SearchPlantsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull FavoritePlantsAdapter.ViewHolder holder, int position) {
         final Plant plant = plants.get(position);
         Glide.with(holder.itemView.getContext()).load(plant.getImageUrl()).into(holder.ivSearchPlant);
         holder.tvSearchPlantName.setText(plant.getName());
         holder.tvSearchPlantPrice.setText(String.valueOf(plant.getPrice()));
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,9 +67,9 @@ public class SearchPlantsAdapter extends RecyclerView.Adapter<SearchPlantsAdapte
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
-            ivSearchPlant = itemView.findViewById(R.id.ivSearchPlantPhoto);
-            tvSearchPlantName = itemView.findViewById(R.id.tvSearchPlantName);
-            tvSearchPlantPrice = itemView.findViewById(R.id.tvSearchPlantPrice);
+            ivSearchPlant = itemView.findViewById(R.id.ivFavoritePlantPhoto);
+            tvSearchPlantName = itemView.findViewById(R.id.tvFavoritePlantName);
+            tvSearchPlantPrice = itemView.findViewById(R.id.tvFavoritePlantPrice);
         }
     }
 }

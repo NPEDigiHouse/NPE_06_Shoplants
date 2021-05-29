@@ -6,12 +6,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.npe_06_shoplants.adapters.FavoritePlantsAdapter;
+import com.example.npe_06_shoplants.models.Plant;
+import com.example.npe_06_shoplants.models.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FavoriteFragment extends Fragment implements View.OnClickListener {
+
+    private List<Plant> plants;
+    private RecyclerView recyclerView;
 
     public static FavoriteFragment newInstance() {
         FavoriteFragment favoriteFragment = new FavoriteFragment();
@@ -33,6 +54,30 @@ public class FavoriteFragment extends Fragment implements View.OnClickListener {
 
         CircleImageView civImageProfile = view.findViewById(R.id.civImageProfile);
         civImageProfile.setOnClickListener(this);
+
+        recyclerView = view.findViewById(R.id.rvRecommendedPlants);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
+
+//        FirebaseDatabase.getInstance("https://shoplants-c2e1e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+//                .getReference("Favorite")
+//                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                plants = new ArrayList<>();
+//
+//                for(DataSnapshot item : snapshot.getChildren()){
+//                    Plant plant = item.getValue(Plant.class);
+//                    plants.add(plant);
+//                }
+//                recyclerView.setAdapter(new FavoritePlantsAdapter(plants));
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
 
         return view;
     }

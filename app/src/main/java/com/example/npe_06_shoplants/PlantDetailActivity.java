@@ -14,17 +14,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.npe_06_shoplants.models.Plant;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 public class PlantDetailActivity extends AppCompatActivity {
 
-    private String name, imgUrl;
-    private int price;
-
+    private String name, imgUrl, description;
+    private int price, id;
     private TextView tvTitle ,tvTotalOrder;
     private ImageView ivCover;
     private Button btnDecreaseOrder, btnIncreaseOrder;
@@ -43,10 +51,11 @@ public class PlantDetailActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
-
+        id = intent.getIntExtra("Id",0);
         name = intent.getStringExtra("Name");
         imgUrl = intent.getStringExtra("Image");
         price = intent.getIntExtra("Price",0);
+        description = intent.getStringExtra("Description");
 
         tvTitle = findViewById(R.id.tvToolbarUserDetailTitle);
         ivCover = findViewById(R.id.ivDetailPlantPhoto);
@@ -60,6 +69,35 @@ public class PlantDetailActivity extends AppCompatActivity {
         btnAddtoCart = findViewById(R.id.btnAddToCart);
 
         total = Integer.parseInt(tvTotalOrder.getText().toString());
+
+        findViewById(R.id.favoriteIcon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Plant plant = new Plant();
+                plant.setId(id);
+                plant.setName(name);
+                plant.setImageUrl(imgUrl);
+                plant.setPrice(price);
+                plant.setDescription(description);
+
+                FirebaseDatabase.getInstance("https://shoplants-c2e1e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                        .getReference("Favorite")
+                        .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+                        .child(String.valueOf(plant.getId()))
+                        .setValue(plant)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(PlantDetailActivity.this, "Added to favorites", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(PlantDetailActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+            }
+        });
 
         btnIncreaseOrder.setOnClickListener(new View.OnClickListener() {
             @Override

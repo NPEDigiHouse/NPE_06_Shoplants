@@ -6,11 +6,12 @@
     <string name="sign_in">Sign In</string>
     <string name="or">Or</string>
     <string name="email_address">Email Address</string>
-    <string name="find_your_perfect_plants">Find Your Perfect Plants!</string>
+    <string name="find_your_perfect_plants">Find Your Perfect Plants.</string>
     <string name="home">Home</string>
     <string name="search">Search</string>
     <string name="favorite">Favorite</string>
     <string name="cart">Cart</string>
     <string name="search_for_plants">Search for plants</string>
     <string name="recommended">Recommended</string>
+    <string name="your_favorite_plants">Your Favorite Plants.</string>
 </resources>

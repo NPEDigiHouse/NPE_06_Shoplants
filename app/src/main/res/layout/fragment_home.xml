@@ -52,35 +52,17 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <EditText
-        android:id="@+id/etSearchBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="16dp"
-        android:autofillHints="Search for plants"
-        android:background="@drawable/round_shape"
-        android:drawableStart="@drawable/ic_outline_search_24"
-        android:drawablePadding="8dp"
-        android:fontFamily="@font/nunito_sans"
-        android:hint="@string/search_for_plants"
-        android:inputType="text"
-        android:padding="8dp"
-        app:drawableTint="@color/accentColor2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clTopProfile" />
-
     <!-- recyclerView ini nantinya berbentuk grid horizontal -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRecommendedPlants"
+        android:id="@+id/rvHomePlants"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="0dp"
         android:clipToPadding="false"
         android:padding="12dp"
         android:scrollbars="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etSearchBar"
+        app:layout_constraintTop_toBottomOf="@+id/clTopProfile"
         tools:listitem="@layout/item_grid_plant" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

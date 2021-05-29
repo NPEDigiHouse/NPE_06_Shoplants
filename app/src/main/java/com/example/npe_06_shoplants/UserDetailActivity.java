@@ -4,13 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.opengl.Visibility;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,11 +17,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.npe_06_shoplants.models.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -37,9 +33,7 @@ import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserDetailActivity extends AppCompatActivity {
-    private Button btnSignOut;
     private FirebaseAuth mAuth;
-    private CircleImageView civUserImage;
     private FirebaseUser currentUser;
     private TextView username, email;
     private SharedPreferences preferences;
@@ -59,12 +53,12 @@ public class UserDetailActivity extends AppCompatActivity {
         preferences = getSharedPreferences("loginMethod", MODE_PRIVATE);
         loginMethod = preferences.getString("method", "other");
 
-        if(!loginMethod.equals("signInWithEmailAndPassword")){
+        if (!loginMethod.equals("signInWithEmailAndPassword")) {
             findViewById(R.id.navEditProfile).setVisibility(View.GONE);
         }
 
-        btnSignOut = findViewById(R.id.btnSignOut);
-        civUserImage = findViewById(R.id.civUserImage);
+        Button btnSignOut = findViewById(R.id.btnSignOut);
+        CircleImageView civUserImage = findViewById(R.id.civUserImage);
         username = findViewById(R.id.tvUserName);
         email = findViewById(R.id.tvUserEmail);
         mAuth = FirebaseAuth.getInstance();
@@ -77,17 +71,17 @@ public class UserDetailActivity extends AppCompatActivity {
                 .child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                String usernameVal = "";
-                String emailVal = "";
-                if(snapshot.child("username").getValue() != null){
-                    usernameVal = snapshot.child("username").getValue().toString();
-                }else{
+                String usernameVal;
+                String emailVal;
+                if (snapshot.child("username").getValue() != null) {
+                    usernameVal = Objects.requireNonNull(snapshot.child("username").getValue()).toString();
+                } else {
                     usernameVal = currentUser.getDisplayName();
                 }
 
-                if(snapshot.child("email").getValue() != null){
-                    emailVal = snapshot.child("email").getValue().toString();
-                }else{
+                if (snapshot.child("email").getValue() != null) {
+                    emailVal = Objects.requireNonNull(snapshot.child("email").getValue()).toString();
+                } else {
                     emailVal = currentUser.getEmail();
                 }
 
@@ -102,6 +96,7 @@ public class UserDetailActivity extends AppCompatActivity {
         });
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("CommitPrefEdits")
             @Override
             public void onClick(View view) {
                 mAuth.signOut();
@@ -118,7 +113,7 @@ public class UserDetailActivity extends AppCompatActivity {
             }
         });
 
-        if(currentUser.getPhotoUrl() != null){
+        if (currentUser.getPhotoUrl() != null) {
             Glide.with(this).load(currentUser.getPhotoUrl()).into(civUserImage);
         }
 
@@ -132,7 +127,7 @@ public class UserDetailActivity extends AppCompatActivity {
         }
         // saat memencet icon manage profile pada toolbar
         else if (item.getItemId() == R.id.navEditProfile) {
-            if(loginMethod.equals("signInWithEmailAndPassword")){
+            if (loginMethod.equals("signInWithEmailAndPassword")) {
                 Intent editProfile = new Intent(UserDetailActivity.this, EditProfileActivity.class);
                 startActivity(editProfile);
             }

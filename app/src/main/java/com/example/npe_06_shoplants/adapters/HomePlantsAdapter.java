@@ -21,47 +21,41 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-
-public class SearchPlantsAdapter extends RecyclerView.Adapter<SearchPlantsAdapter.ViewHolder> {
+public class HomePlantsAdapter extends RecyclerView.Adapter<HomePlantsAdapter.ViewHolder> {
     private final List<Plant> plants;
 
-    public SearchPlantsAdapter(List<Plant> plants) {
+    public HomePlantsAdapter(List<Plant> plants) {
         this.plants = plants;
     }
 
     @NonNull
     @NotNull
     @Override
-    public SearchPlantsAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grid_search, parent, false);
-        return new ViewHolder(view);
+    public HomePlantsAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grid_plant, parent, false);
+        return new HomePlantsAdapter.ViewHolder(view);
     }
 
     @SuppressLint("DefaultLocale")
     @Override
-    public void onBindViewHolder(@NonNull @NotNull SearchPlantsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull HomePlantsAdapter.ViewHolder holder, int position) {
         final Plant plant = plants.get(position);
 
         Glide.with(holder.itemView.getContext())
                 .load(plant.getImageUrl())
-                .apply(new RequestOptions().override(300, 360))
-                .into(holder.ivSearchPlant);
+                .apply(new RequestOptions().override(320, 400))
+                .into(holder.ivHomePlant);
 
-        holder.tvSearchPlantName.setText(plant.getName());
-
-        holder.tvSearchPlantPrice.setText(String.format("Rp.%d", plant.getPrice()));
+        holder.tvHomePlantName.setText(plant.getName());
+        holder.tvHomePlantPrice.setText(String.format("Rp.%d", plant.getPrice()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(holder.itemView.getContext(), PlantDetailActivity.class);
-
-                intent.putExtra("Id", plant.getId());
-                intent.putExtra("Name",plant.getName());
-
+                intent.putExtra("Name", plant.getName());
                 intent.putExtra("Image", plant.getImageUrl());
                 intent.putExtra("Price", plant.getPrice());
-                intent.putExtra("Description", plant.getDescription());
                 holder.itemView.getContext().startActivity(intent);
             }
         });
@@ -73,15 +67,15 @@ public class SearchPlantsAdapter extends RecyclerView.Adapter<SearchPlantsAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivSearchPlant;
-        TextView tvSearchPlantName, tvSearchPlantPrice;
+        ImageView ivHomePlant;
+        TextView tvHomePlantName, tvHomePlantPrice;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
-            ivSearchPlant = itemView.findViewById(R.id.ivSearchPlantPhoto);
-            tvSearchPlantName = itemView.findViewById(R.id.tvSearchPlantName);
-            tvSearchPlantPrice = itemView.findViewById(R.id.tvSearchPlantPrice);
+            ivHomePlant = itemView.findViewById(R.id.ivHomePlantPhoto);
+            tvHomePlantName = itemView.findViewById(R.id.tvHomePlantName);
+            tvHomePlantPrice = itemView.findViewById(R.id.tvHomePlantPrice);
         }
     }
 }

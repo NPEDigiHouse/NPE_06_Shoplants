@@ -14,4 +14,9 @@
     <string name="search_for_plants">Search for plants</string>
     <string name="recommended">Recommended</string>
     <string name="your_favorite_plants">Your Favorite Plants.</string>
+    <string name="username_or_email">Username or Email</string>
+    <string name="dont_have_any_account">Dont Have Any Account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account">Already Have an Account?</string>
+    <string name="username">Username</string>
 </resources>

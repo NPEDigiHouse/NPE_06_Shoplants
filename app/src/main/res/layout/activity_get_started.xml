@@ -11,7 +11,7 @@
         android:id="@+id/logo"
         android:layout_width="96dp"
         android:layout_height="80dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:scaleType="fitXY"
         android:src="@drawable/app_logo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,6 +20,7 @@
         tools:ignore="ContentDescription" />
 
     <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_shoplants_text"
@@ -50,9 +51,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="360dp"
-        android:layout_height="400dp"
-        android:layout_marginTop="220dp"
+        android:layout_width="300dp"
+        android:layout_height="360dp"
+        android:layout_marginTop="200dp"
         android:src="@drawable/bg_plant_center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +64,6 @@
         android:id="@+id/btnGetStarted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:fontFamily="@font/nunito_sans_bold"
         android:text="@string/get_started"
         android:textAllCaps="false"
@@ -77,5 +77,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <LinearLayout
+        android:id="@+id/llSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGetStarted">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_sans"
+            android:text="@string/dont_have_any_account"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <Space
+            android:layout_width="4dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_sans_bold"
+            android:text="@string/sign_up"
+            android:textColor="@color/primaryColor"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

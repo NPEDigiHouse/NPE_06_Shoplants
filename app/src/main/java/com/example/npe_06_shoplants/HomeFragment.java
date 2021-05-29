@@ -2,16 +2,21 @@ package com.example.npe_06_shoplants;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import com.example.npe_06_shoplants.models.Plant;
+import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
+
+    private RecyclerView recyclerView;
+    private List<Plant> list;
 
     public static HomeFragment newInstance() {
         HomeFragment homeFragment = new HomeFragment();

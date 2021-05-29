@@ -21,7 +21,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-
 public class SearchPlantsAdapter extends RecyclerView.Adapter<SearchPlantsAdapter.ViewHolder> {
     private final List<Plant> plants;
 
@@ -55,10 +54,8 @@ public class SearchPlantsAdapter extends RecyclerView.Adapter<SearchPlantsAdapte
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(holder.itemView.getContext(), PlantDetailActivity.class);
-
                 intent.putExtra("Id", plant.getId());
                 intent.putExtra("Name",plant.getName());
-
                 intent.putExtra("Image", plant.getImageUrl());
                 intent.putExtra("Price", plant.getPrice());
                 intent.putExtra("Description", plant.getDescription());
@@ -78,7 +75,6 @@ public class SearchPlantsAdapter extends RecyclerView.Adapter<SearchPlantsAdapte
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-
             ivSearchPlant = itemView.findViewById(R.id.ivSearchPlantPhoto);
             tvSearchPlantName = itemView.findViewById(R.id.tvSearchPlantName);
             tvSearchPlantPrice = itemView.findViewById(R.id.tvSearchPlantPrice);

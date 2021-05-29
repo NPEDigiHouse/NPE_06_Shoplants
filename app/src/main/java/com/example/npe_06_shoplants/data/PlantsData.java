@@ -30,28 +30,29 @@ public class PlantsData {
             700000,
             800000,
             900000,
-            1000000
+            1000000,
     };
 
-    private static final String[] descirption = {
-            "Bonsai",
-            "Bambu",
-            "Lavender",
-            "Red Plant",
-            "Kaktus"
+    private static final String[] description = {
+            "Bonsai is a Japanese version of the original traditional Chinese art penjing or penzai.",
+            "Bamboos are a diverse group of evergreen perennial flowering plants in the subfamily Bambusoideae of the grass family Poaceae.",
+            "Lavender plants will give us peace and can also repel insects such as mosquitoes",
+            "This plant can grow up to 3 meters tall and the leaves are always fresh.",
+            "Cactus can grow for a long time without water, so there is no need to water it as often",
+            "Ficus retusa is a fast growing, round, broad-headed, evergreen shrub or evergreen tree",
     };
 
     public static List<Plant> getPlantsData() {
         List<Plant> list = new ArrayList<>();
         for (int i = 0; i < plantName.length; i++) {
-            int id = i+1;
+            int id = i + 1;
 
             Plant plant = new Plant();
             plant.setId(id);
             plant.setName(plantName[i]);
             plant.setImageUrl(imageURL[i]);
             plant.setPrice(price[i]);
-            plant.setDescription(descirption[i]);
+            plant.setDescription(description[i]);
 
             list.add(plant);
         }

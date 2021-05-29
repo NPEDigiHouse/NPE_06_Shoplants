@@ -2,7 +2,6 @@ package com.example.npe_06_shoplants;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.example.npe_06_shoplants.adapters.HomePlantsAdapter;
-import com.example.npe_06_shoplants.adapters.SearchPlantsAdapter;
 import com.example.npe_06_shoplants.data.PlantsData;
 import com.example.npe_06_shoplants.models.Plant;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +31,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Bundle args = new Bundle();
         // args.putString(MainActivity.TOOLBAR_TITLE, "home");
         homeFragment.setArguments(args);
-
         return homeFragment;
     }
 
@@ -53,6 +50,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         civImageProfile.setOnClickListener(this);
 
         plants = PlantsData.getPlantsData();
+
         recyclerView = view.findViewById(R.id.rvHomePlants);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setHasFixedSize(true);

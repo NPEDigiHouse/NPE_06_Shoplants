@@ -46,6 +46,9 @@ public class SearchPlantsAdapter extends RecyclerView.Adapter<SearchPlantsAdapte
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(holder.itemView.getContext(), PlantDetailActivity.class);
+                intent.putExtra("Name",plant.getName());
+                intent.putExtra("Image", plant.getImageUrl());
+                intent.putExtra("Price", plant.getPrice());
                 holder.itemView.getContext().startActivity(intent);
             }
         });
